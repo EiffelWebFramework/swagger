@@ -1,0 +1,11 @@
+{
+  "apiVersion": "0.1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:9090/api",
+  "apis": [
+    {
+			"path": "/order",
+    	"description": "Operations about order"
+    }   
+  ]
+}

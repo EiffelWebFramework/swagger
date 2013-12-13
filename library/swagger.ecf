@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-5-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-5-0 http://www.eiffel.com/developers/xml/configuration-1-5-0.xsd" name="swagger" uuid="10f91df5-458c-4a64-8eb9-0596f18d7dbd" library_target="swagger">
+	<target name="swagger">
+		<root all_classes="true"/>
+		<option warning="true" full_class_checking="true" is_attached_by_default="true" void_safety="none" syntax="standard">
+			<assertions precondition="true" postcondition="true" check="true" invariant="true" loop="true" supplier_precondition="true"/>
+		</option>
+		<mapping old_name="READABLE_STRING" new_name="READABLE_STRING_8"/>
+		<mapping old_name="IMMUTABLE_STRING" new_name="IMMUTABLE_STRING_8"/>
+		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf" readonly="true"/>
+                <library name="json" location="$EIFFEL_LIBRARY\json\library\json.ecf" readonly="true"/>
+		<library name="gobo-kernel" location="$EIFFEL_LIBRARY\gobo-ecf\ecf\gobo-kernel.ecf" readonly="true"/>
+		<library name="gobo-structure" location="$EIFFEL_LIBRARY\gobo-ecf\ecf\gobo-structure.ecf" readonly="true"/>
+                <library name="http" location="$EIFFEL_LIBRARY\EWF\library/network/protocol/http/http.ecf" readonly="true"/>
+		<library name="wsf" location="$EIFFEL_LIBRARY\EWF\library\server\wsf\wsf.ecf" readonly="true"/>
+                <library name="uri_template" location="$EIFFEL_LIBRARY\EWF\library/text/parser/uri_template/uri_template.ecf" readonly="true"/>
+		<cluster name="swagger" location=".\" recursive="true"/>
+	</target>
+</system>

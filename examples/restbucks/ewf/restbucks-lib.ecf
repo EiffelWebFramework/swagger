@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-5-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-5-0 http://www.eiffel.com/developers/xml/configuration-1-5-0.xsd" name="restbucks-lib" uuid="ce251a28-557e-43f5-baf6-a7e8973ed601" library_target="restbucks-lib">
+	<target name="restbucks-lib">
+		<root all_classes="true"/>
+		<option warning="true" full_class_checking="true" is_attached_by_default="true" void_safety="all" syntax="standard">
+			<assertions precondition="true" postcondition="true" check="true" invariant="true" loop="true" supplier_precondition="true"/>
+		</option>
+		<library name="base" location="$ISE_LIBRARY/library/base/base-safe.ecf"/>
+		<library name="eel" location="$ISE_LIBRARY\contrib\library\text\encryption\eel\eel-safe.ecf" readonly="true"/>
+		<library name="http" location="$EIFFEL_LIBRARY\EWF\library\network\protocol\http\http-safe.ecf" readonly="true"/>
+		<library name="json" location="$EIFFEL_LIBRARY\json\library\json-safe.ecf" readonly="true"/>
+		<library name="wsf" location="$EIFFEL_LIBRARY\EWF\library\server\wsf\wsf-safe.ecf" readonly="true"/>
+		<library name="wsf_extension" location="$EIFFEL_LIBRARY\EWF\library\server\wsf\wsf_extension-safe.ecf" readonly="true"/>
+		<cluster name="restbucks-lib" location="$EIFFEL_LIBRARY\EWF\examples\restbucksCRUD\src\" recursive="true">
+			<file_rule>
+				<exclude>/policy_driven_resource$</exclude>
+			</file_rule>
+		</cluster>
+	</target>
+</system>

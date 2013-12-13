@@ -1,0 +1,173 @@
+{
+  "apiVersion": "0.1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:9090",
+  "resourcePath": "/order",
+  "apis": [
+    {
+      "path": "/order/{orderId}",
+      "description": "Operations about order",
+      "operations": [
+        {
+          "httpMethod": "GET",
+          "summary": "Get order",
+          "notes": "",
+          "responseClass": "Order",
+          "nickname": "getOrder",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "orderId",
+              "description": "Order identifier",
+              "dataType": "number",
+              "required": true,
+              "allowMultiple": false,
+              "defaultValue": ""
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 500,
+              "message": "Internal Server Error"
+            }
+          ]
+        },
+        {
+          "httpMethod": "PUT",
+          "summary": "Update order",
+          "notes": "",
+          "responseClass": "",
+          "nickname": "putOrder",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "orderId",
+              "description": "Order identifier",
+              "dataType": "number",
+              "required": true,
+              "allowMultiple": false,
+              "defaultValue": ""
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "description": "Order in a JSON file.",
+              "dataType": "Order",
+              "required": true,
+              "allowMultiple": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 500,
+              "reason": "Internal Server Error"
+            }
+          ]
+        },
+        {
+          "httpMethod": "DELETE",
+          "summary": "Delete order",
+          "notes": "",
+          "responseClass": "",
+          "nickname": "deleteOrder",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "orderId",
+              "description": "Order identifier",
+              "dataType": "number",
+              "required": true,
+              "allowMultiple": false,
+              "defaultValue": ""
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 500,
+              "reason": "Internal Server Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/order/",
+      "description": "Operations about order",
+      "operations": [
+        {
+          "httpMethod": "POST",
+          "summary": "Insert a new order",
+          "notes": "",
+          "responseClass": "Order",
+          "nickname": "postOrder",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "description": "Order in a JSON file.",
+              "dataType": "Order",
+              "required": true,
+              "allowMultiple": false
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 500,
+              "reason": "Internal Server Error"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Order": {
+      "id": "Order",
+      "properties": {
+        "location": {
+          "type": "string",
+          "required": "true",
+          "description": "Location"
+        },
+        "status": {
+          "type": "string",
+          "required": "true",
+          "description": "Status"
+        },
+        "items": {
+          "type": "Array",
+          "required": "true",
+          "description": "Items",
+          "items": {
+            "type": "Item"
+          }
+        }
+      }
+    },
+    "Item": {
+      "id": "Item",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": "true",
+          "description": "Name"
+        },
+        "size": {
+          "type": "string",
+          "required": "true",
+          "description": "Size"
+        },
+        "quantity": {
+          "type": "integer",
+          "required": "true",
+          "description": "Quantity"
+        },
+        "option": {
+          "type": "string",
+          "required": "true",
+          "description": "Option"
+        }
+      }
+    }
+  }
+}
