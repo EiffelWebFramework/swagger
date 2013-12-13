@@ -15,7 +15,7 @@ You will need these dependencies:
 * [Gobo ECF files](https://github.com/oligot/gobo-ecf)
 
 Just clone the Git repositories (or download the latest release) locally and define the environment variable
-EIFFEL_LIBRARY. See also the [EWF Getting Started guid](http://eiffelwebframework.github.io/EWF/getting-started/).
+EIFFEL_LIBRARY. See also the [EWF Getting Started guide](http://eiffelwebframework.github.io/EWF/getting-started/).
 
 ### To run
 
