@@ -142,7 +142,7 @@ feature {NONE} -- Implementation
 					l_apis.item.apis as l_resource_apis
 				loop
 					across
-						l_resource_apis.item as l_methods
+						l_resource_apis.item.methods as l_methods
 					loop
 						l_method := l_methods.item
 						create l_options_filter.make (router)

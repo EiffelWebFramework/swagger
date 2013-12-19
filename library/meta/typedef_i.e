@@ -62,7 +62,7 @@ feature -- Status report
 		ensure
 			simples_has_no_array: is_simple or is_facet implies Result = False
 			array_has_array: is_array implies Result = True
-			record_may_have_array: is_record implies Result = across as_record as field some field.item.type.has_array end
+			record_may_have_array: is_record implies Result = across as_record.fields as field some field.item.type.has_array end
 		end
 
 feature -- Comparison

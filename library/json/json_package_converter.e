@@ -61,7 +61,7 @@ feature -- Conversion
 							else
 								l_return_type := Null_def
 							end
-							create l_method.make (l_nickname, l_path, create {PACK [PARAMETER]}.make (l_swagger_parameters), l_return_type, l_http_method)
+							create l_method.make (l_nickname, l_path, l_swagger_parameters, l_return_type, l_http_method)
 							l_swagger_apis.force (l_method, l_swagger_apis.upper + 1)
 						end
 					end

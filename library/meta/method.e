@@ -15,7 +15,7 @@ feature {NONE} -- Initialization
 
 	make (a_nickname: READABLE_STRING;
 		  a_path: READABLE_STRING;
-		  a_parameter_list: PACK [PARAMETER];
+		  a_parameter_list: READABLE_INDEXABLE [PARAMETER];
 		  a_return: TYPEDEF_I;
 		  a_http_method: READABLE_STRING)
 		do
@@ -38,7 +38,7 @@ feature {NONE} -- Initialization
 	make_with_description (a_nickname: READABLE_STRING;
 						   a_path: READABLE_STRING;
 						   a_description: READABLE_STRING;
-						   a_parameter_list: PACK [PARAMETER];
+						   a_parameter_list: READABLE_INDEXABLE [PARAMETER];
 						   a_return: TYPEDEF_I;
 						   a_http_method: READABLE_STRING)
 		require
@@ -72,11 +72,11 @@ feature -- Access
 
 	path: READABLE_STRING
 
-	has_description: like {PACKAGEABLE_I}.has_description
+	has_description: BOOLEAN
 
 	description: READABLE_STRING
 
-	parameters: PACK [PARAMETER]
+	parameters: READABLE_INDEXABLE [PARAMETER]
 
 	return: TYPEDEF_I
 

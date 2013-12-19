@@ -1,13 +1,11 @@
 note
-	description: "A package is a set of methods. Immutable."
+	description: "A package contains a set of methods."
 	author: "Benoît Marchal"
 
 class
 	PACKAGE
 
 inherit
-	PACK [METHOD]
-		rename make as pack_make end
 	PACKAGEABLE_I
 
 create
@@ -15,28 +13,28 @@ create
 
 feature {NONE} -- Initialization
 
-	make (a_name: READABLE_STRING; a_content: ARRAY [METHOD])
+	make (a_name: READABLE_STRING; some_methods: ARRAY [METHOD])
 		do
-			pack_make (a_content)
 			name := a_name
+			methods := some_methods
 			has_description := False
 			create {IMMUTABLE_STRING_8}description.make_empty
-		ensure then
+		ensure
 			name_set: name.is_equal (a_name)
-			content_set: content.is_equal (a_content)
+			methods_set: methods = some_methods
 			no_description: not has_description
 		end
 
-	make_with_description (a_name: READABLE_STRING; a_description: READABLE_STRING; a_content: ARRAY [METHOD])
+	make_with_description (a_name: READABLE_STRING; a_description: READABLE_STRING; some_methods: ARRAY [METHOD])
 		do
-			pack_make (a_content)
 			name := a_name
+			methods := some_methods
 			description := a_description
 			has_description := True
 		ensure
 			name_set: name.is_equal (a_name)
 			description_set: description.is_equal (a_description)
-			content_set: content.is_equal (a_content)
+			methods_set: methods = some_methods
 			has_description: has_description
 		end
 
@@ -46,12 +44,14 @@ feature -- Access
 
 	description: READABLE_STRING
 
-	has_description: BOOLEAN
+	methods: READABLE_INDEXABLE [METHOD]
 
 	key: detachable STRING
 			-- Resource key
 
 feature -- Status report
+
+	has_description: BOOLEAN
 
 	first_level: BOOLEAN
 
