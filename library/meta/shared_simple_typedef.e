@@ -67,7 +67,7 @@ feature -- Declaration
 
 feature -- Test
 
-	is_swagger_simple_type (a_type: like {STRING_ANCHOR}.string_anchor): BOOLEAN
+	is_swagger_simple_type (a_type: READABLE_STRING): BOOLEAN
 		do
 			Result := a_type.is_equal ("byte") or a_type.is_equal ("boolean")
 						or a_type.is_equal ("int") or a_type.is_equal ("long")
@@ -78,7 +78,7 @@ feature -- Test
 			coherent: Result implies not swagger_to_simple_typedef (a_type).is_no_good
 		end
 
-	is_jsonschema_simple_type (a_type: like {STRING_ANCHOR}.string_anchor): BOOLEAN
+	is_jsonschema_simple_type (a_type: READABLE_STRING): BOOLEAN
 		do
 			Result := a_type.is_equal ("boolean") or a_type.is_equal ("integer")
 						or a_type.is_equal ("number") or a_type.is_equal ("null")
@@ -96,7 +96,7 @@ feature -- Test
 
 feature -- Factory
 
-	swagger_to_simple_typedef (a_type: like {STRING_ANCHOR}.string_anchor): TYPEDEF_I
+	swagger_to_simple_typedef (a_type: READABLE_STRING): TYPEDEF_I
 		do
 			if a_type.is_equal ("byte") then
 				Result := Byte_def
@@ -121,7 +121,7 @@ feature -- Factory
 			end
 		end
 
-	jsonschema_to_simple_typedef (a_type: like {STRING_ANCHOR}.string_anchor): TYPEDEF_I
+	jsonschema_to_simple_typedef (a_type: READABLE_STRING): TYPEDEF_I
 		do
 			if a_type.is_equal ("boolean") then
 				Result := Boolean_def
@@ -138,7 +138,7 @@ feature -- Factory
 			end
 		end
 
-	plsql_to_simple_typedef (a_type: like {STRING_ANCHOR}.string_anchor): TYPEDEF_I
+	plsql_to_simple_typedef (a_type: READABLE_STRING): TYPEDEF_I
 		do
 			if a_type.is_equal ("NUMBER") then
 				Result := Number_def
@@ -155,7 +155,7 @@ feature -- Factory
 
 feature -- Formatting
 
-	typedef_to_swagger (a_type: TYPEDEF_I): like {STRING_ANCHOR}.string_anchor
+	typedef_to_swagger (a_type: TYPEDEF_I): READABLE_STRING
 		require
 			isgood: not a_type.is_no_good
 		do

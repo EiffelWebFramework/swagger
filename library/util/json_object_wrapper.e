@@ -12,7 +12,7 @@ feature {NONE} -- String access
 			Result := json.has_key (key) and then attached {JSON_STRING} json.item (key)
 		end
 
-	string_item (json: JSON_OBJECT; key: JSON_STRING): like {STRING_ANCHOR}.string_anchor
+	string_item (json: JSON_OBJECT; key: JSON_STRING): READABLE_STRING
 		require
 			has_string: has_string (json, key)
 		do

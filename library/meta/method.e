@@ -73,7 +73,7 @@ feature -- Access
 	nickname: READABLE_STRING
 			-- Nickname
 
-	path: like string_anchor
+	path: READABLE_STRING
 
 	has_description: like {PACKAGEABLE_I}.has_description
 
@@ -83,7 +83,7 @@ feature -- Access
 
 	return: TYPEDEF_I
 
-	http_method: like string_anchor
+	http_method: READABLE_STRING
 
 feature -- Status report
 

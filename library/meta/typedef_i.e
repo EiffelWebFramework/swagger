@@ -18,7 +18,7 @@ inherit
 
 feature -- Access
 
-	name: like {STRING_ANCHOR}.string_anchor
+	name: READABLE_STRING
 		deferred
 		end
 

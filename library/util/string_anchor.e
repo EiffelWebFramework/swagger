@@ -7,7 +7,7 @@ deferred class
 
 feature -- Immutability change
 
-	make_immutable_string (a_string: like string_anchor): like string_anchor
+	make_immutable_string (a_string: READABLE_STRING): READABLE_STRING
 		do
 			if a_string.is_immutable then
 				Result := a_string
@@ -18,12 +18,4 @@ feature -- Immutability change
 			immutable: Result.is_immutable
 		end
 
-feature -- Anchor
-
-	string_anchor: READABLE_STRING_8
-		do
-			-- we return something just to please the void-safe compiler
-			create {IMMUTABLE_STRING_8}Result.make_empty
-		end
-		
 end

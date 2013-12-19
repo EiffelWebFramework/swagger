@@ -13,11 +13,11 @@ inherit
 
 feature -- Access
 
-	uri: like {STRING_ANCHOR}.string_anchor
+	uri: READABLE_STRING
 		deferred
 		end
 
-	json: like {STRING_ANCHOR}.string_anchor
+	json: READABLE_STRING
 		deferred
 		end
 

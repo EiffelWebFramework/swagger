@@ -45,7 +45,7 @@ feature {NONE} -- Constructor
 			json_null_set: is_json_null = attached {JSON_NULL} a_value
 		end
 
-	make_with_file (a_filename: like string_anchor; a_value: JSON_VALUE)
+	make_with_file (a_filename: READABLE_STRING; a_value: JSON_VALUE)
 		require
 			filename_not_empty: not a_filename.is_empty
 		local
@@ -61,7 +61,7 @@ feature {NONE} -- Constructor
 			json_null_set: is_json_null = attached {JSON_NULL} a_value
 		end
 
-	make_with_file_only (a_filename: like string_anchor)
+	make_with_file_only (a_filename: READABLE_STRING)
 		require
 			filename_not_empty: not a_filename.is_empty
 		do

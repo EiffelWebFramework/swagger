@@ -7,7 +7,7 @@ deferred class
 
 feature -- Access
 
-	name: like {STRING_ANCHOR}.string_anchor
+	name: READABLE_STRING
 		deferred
 		end
 
@@ -15,7 +15,7 @@ feature -- Access
 		deferred
 		end
 
-	description: like {STRING_ANCHOR}.string_anchor
+	description: READABLE_STRING
 		require
 			has_description: has_description
 		deferred

@@ -19,7 +19,7 @@ create {SHARED_SIMPLE_TYPEDEF}
 
 feature {NONE} -- Constructor
 
-	make (a_name: like string_anchor)
+	make (a_name: READABLE_STRING)
 		do
 			name := make_immutable_string (a_name)
 			is_no_good := False

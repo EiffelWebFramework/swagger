@@ -38,7 +38,7 @@ feature {NONE} -- Constructor
 
 feature -- Access
 
-	item (a_key: like {STRING_ANCHOR}.string_anchor): TYPEDEF_I
+	item (a_key: READABLE_STRING): TYPEDEF_I
 		do
 			if attached declarations.item (a_key) as a_declaration then
 				Result := a_declaration
@@ -49,10 +49,10 @@ feature -- Access
 
 feature {NONE} -- Implementation
 
-	declarations: HASH_TABLE [TYPEDEF_I, like {STRING_ANCHOR}.string_anchor]
+	declarations: HASH_TABLE [TYPEDEF_I, READABLE_STRING]
 	level: INTEGER
 	models: JSON_OBJECT
-	filename: like {STRING_ANCHOR}.string_anchor
+	filename: READABLE_STRING
 
 	compile
 		do
