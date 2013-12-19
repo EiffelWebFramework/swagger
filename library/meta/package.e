@@ -15,10 +15,10 @@ create
 
 feature {NONE} -- Initialization
 
-	make (a_name: like name; a_content: like content)
+	make (a_name: READABLE_STRING; a_content: ARRAY [METHOD])
 		do
 			pack_make (a_content)
-			name := make_immutable_string (a_name)
+			name := a_name
 			has_description := False
 			create {IMMUTABLE_STRING_8}description.make_empty
 		ensure then
@@ -27,11 +27,11 @@ feature {NONE} -- Initialization
 			no_description: not has_description
 		end
 
-	make_with_description (a_name: like name; a_description: like description; a_content: like content)
+	make_with_description (a_name: READABLE_STRING; a_description: READABLE_STRING; a_content: ARRAY [METHOD])
 		do
 			pack_make (a_content)
-			name := make_immutable_string (a_name)
-			description := make_immutable_string (a_description)
+			name := a_name
+			description := a_description
 			has_description := True
 		ensure
 			name_set: name.is_equal (a_name)
@@ -42,14 +42,14 @@ feature {NONE} -- Initialization
 
 feature -- Access
 
-	name: like {PACKAGEABLE_I}.name
+	name: READABLE_STRING
 
-	description: like {PACKAGEABLE_I}.description
+	description: READABLE_STRING
 
-	has_description: like {PACKAGEABLE_I}.has_description
+	has_description: BOOLEAN
 
-        key: detachable STRING
-                        -- Resource key
+	key: detachable STRING
+			-- Resource key
 
 feature -- Status report
 
@@ -62,12 +62,12 @@ feature -- Element Change
 			first_level := true
 		end
 
-       set_key (a_key: STRING)
-                       -- Set `key' to `a_key'.
-               do
-                       key := a_key
-               ensure
-                       key_set: key = a_key
-               end
+	set_key (a_key: STRING)
+			-- Set `key' to `a_key'.
+		do
+			key := a_key
+		ensure
+			key_set: key = a_key
+		end
 
 end

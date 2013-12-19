@@ -121,7 +121,7 @@ feature -- Conversion
 		end
 
 invariant
-	immutable: name.is_immutable
+--	immutable: name.is_immutable
 	coherent: is_simple xor is_facet xor is_array xor is_record
 
 end

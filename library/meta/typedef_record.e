@@ -13,12 +13,6 @@ inherit
 			is_equal
 		end
 
-inherit {NONE}
-	STRING_ANCHOR
-		undefine
-			is_equal
-		end
-
 create
 	make
 
@@ -75,7 +69,7 @@ feature -- Access
 			Result := across Current as f some f.item.type.has_array end
 		end
 
-	name: like {TYPEDEF_I}.name
+	name: READABLE_STRING
 		local
 			a_buffer: STRING
 		once ("OBJECT")
@@ -88,7 +82,7 @@ feature -- Access
 				end
 			end
 			a_buffer.append (")")
-			Result := make_immutable_string (a_buffer)
+			Result := a_buffer
 		end
 
 invariant

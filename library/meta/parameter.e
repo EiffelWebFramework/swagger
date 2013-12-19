@@ -9,23 +9,20 @@ inherit
 	FIELD
 		rename make as field_make, make_with_description as field_make_with_description end
 
-inherit {NONE}
-	STRING_ANCHOR
-
 create
 	make, make_with_description
 
 feature {NONE} -- Constructor
 
-	make (a_name: like name;
-		  a_type: like type;
-		  an_origin: like origin;
-		  a_default_value: like default_value;
+	make (a_name: READABLE_STRING;
+		  a_type: TYPEDEF_I;
+		  an_origin: PARAMETER_ORIGIN;
+		  a_default_value: detachable READABLE_STRING;
 		  a_required_flag, an_unbounded_flag: BOOLEAN)
 		require
 			name_not_empty: not a_name.is_empty
 		do
-			name := make_immutable_string (a_name)
+			name := a_name
 			type := a_type
 			has_description := False
 			create {IMMUTABLE_STRING_8}description.make_empty
@@ -43,20 +40,20 @@ feature {NONE} -- Constructor
 			unbounded_set: is_unbounded = an_unbounded_flag
 		end
 
-	make_with_description (a_name: like name;
-						   a_description: like description;
-						   a_type: like type;
-						   an_origin: like origin;
-		  				   a_default_value: like default_value;
+	make_with_description (a_name: READABLE_STRING;
+						   a_description: READABLE_STRING;
+						   a_type: TYPEDEF_I;
+						   an_origin: PARAMETER_ORIGIN;
+		  				   a_default_value: detachable READABLE_STRING;
 						   a_required_flag, an_unbounded_flag: BOOLEAN)
 		require
 			name_not_empty: not a_name.is_empty
 			description_not_empty: not a_description.is_empty
 		do
-			name := make_immutable_string (a_name)
+			name := a_name
 			type := a_type
 			has_description := True
-			description := make_immutable_string (a_description)
+			description := a_description
 			origin := an_origin
 			default_value := a_default_value
 			is_required := a_required_flag

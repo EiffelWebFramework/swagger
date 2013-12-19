@@ -22,7 +22,7 @@ feature -- Access
 		end
 
 invariant
-	immutable: name.is_immutable and (has_description implies description.is_immutable)
+--	immutable: name.is_immutable and (has_description implies description.is_immutable)
 	coherent_flag: has_description implies not description.is_empty
 
 end

@@ -8,21 +8,17 @@ class
 inherit
 	SWAGGER_LOCATOR_I
 
-inherit {NONE}
-	STRING_ANCHOR
-		undefine is_equal end
-
 create
 	make_with_uri, make_with_file, make_with_json_only, make_with_file_only
 
 feature {NONE} -- Constructor
 
-	make_with_uri (an_uri: like uri; a_value: JSON_VALUE)
+	make_with_uri (an_uri: READABLE_STRING; a_value: JSON_VALUE)
 		require
 			uri_not_empty: not an_uri.is_empty
 		do
-			uri := make_immutable_string (an_uri)
-			json := make_immutable_string (a_value.representation)
+			uri := an_uri
+			json := a_value.representation
 			is_json_null := attached {JSON_NULL} a_value
 			has_uri := True
 		ensure
@@ -35,7 +31,7 @@ feature {NONE} -- Constructor
 	make_with_json_only (a_value: JSON_VALUE)
 		do
 			uri := no_uri
-			json := make_immutable_string (a_value.representation)
+			json := a_value.representation
 			is_json_null := attached {JSON_NULL} a_value
 			has_uri := False
 		ensure
@@ -74,10 +70,10 @@ feature {NONE} -- Constructor
 
 feature -- Access
 
-	uri: like {SWAGGER_LOCATOR_I}.uri
-	json: like {SWAGGER_LOCATOR_I}.json
-	has_uri: like {SWAGGER_LOCATOR_I}.has_uri
-	is_json_null: like {SWAGGER_LOCATOR_I}.is_json_null
+	uri: READABLE_STRING
+	json: READABLE_STRING
+	has_uri: BOOLEAN
+	is_json_null: BOOLEAN
 
 feature {NONE} -- Constants
 

@@ -8,9 +8,6 @@ class
 inherit
 	ITERABLE [T]
 
-inherit {NONE}
-	STRING_ANCHOR
-
 create
 	make
 

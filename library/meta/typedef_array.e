@@ -8,12 +8,6 @@ class
 inherit
 	TYPEDEF_I
 
-inherit {NONE}
-	STRING_ANCHOR
-		undefine
-			is_equal
-		end
-
 create
 	make
 
@@ -28,14 +22,14 @@ feature {NONE} -- Constructor
 
 feature -- Access
 
-	name: like {TYPEDEF_I}.name
+	name: READABLE_STRING
 		local
 			a_name: STRING
 		once ("OBJECT")
 			a_name := "ARRAY ["
 			a_name.append (item_type.name)
 			a_name.append_character (']')
-			Result := make_immutable_string (a_name)
+			Result := a_name
 		end
 
 	is_no_good: BOOLEAN

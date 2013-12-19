@@ -8,26 +8,23 @@ class
 inherit
 	PACKAGEABLE_I
 
-inherit {NONE}
-	STRING_ANCHOR
-
 create
 	make
 
 feature {NONE} -- Initialization
 
 	make (a_nickname: READABLE_STRING;
-		  a_path: like path;
-		  a_parameter_list: like parameters;
-		  a_return: like return;
-		  a_http_method: like http_method)
+		  a_path: READABLE_STRING;
+		  a_parameter_list: PACK [PARAMETER];
+		  a_return: TYPEDEF_I;
+		  a_http_method: READABLE_STRING)
 		do
-			nickname := make_immutable_string (a_nickname)
-			path := make_immutable_string (a_path)
+			nickname := a_nickname
+			path := a_path
 			create {IMMUTABLE_STRING_8}description.make_empty
 			parameters := a_parameter_list
 			return := a_return
-			http_method := make_immutable_string (a_http_method)
+			http_method := a_http_method
 			has_description := False
 		ensure
 			nickname_set: nickname.is_equal (a_nickname)
@@ -39,20 +36,20 @@ feature {NONE} -- Initialization
 		end
 
 	make_with_description (a_nickname: READABLE_STRING;
-						   a_path: like path;
-						   a_description: like description;
-						   a_parameter_list: like parameters;
-						   a_return: like return;
-						   a_http_method: like http_method)
+						   a_path: READABLE_STRING;
+						   a_description: READABLE_STRING;
+						   a_parameter_list: PACK [PARAMETER];
+						   a_return: TYPEDEF_I;
+						   a_http_method: READABLE_STRING)
 		require
 			description_not_empty: not a_description.is_empty
 		do
-			nickname := make_immutable_string (a_nickname)
-			path := make_immutable_string (a_path)
-			description := make_immutable_string (a_description)
+			nickname := a_nickname
+			path := a_path
+			description := a_description
 			parameters := a_parameter_list
 			return := a_return
-			http_method := make_immutable_string (a_http_method)
+			http_method := a_http_method
 			has_description := True
 		ensure
 			nickname_set: nickname.is_equal (a_nickname)
@@ -77,7 +74,7 @@ feature -- Access
 
 	has_description: like {PACKAGEABLE_I}.has_description
 
-	description: like {PACKAGEABLE_I}.description
+	description: READABLE_STRING
 
 	parameters: PACK [PARAMETER]
 

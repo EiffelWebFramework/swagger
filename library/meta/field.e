@@ -8,19 +8,16 @@ class
 inherit
 	PACKAGEABLE_I
 
-inherit {NONE}
-	STRING_ANCHOR
-
 create
 	make, make_with_description
 
 feature {NONE} -- Initialization
 
-	make (a_name: like name; a_type: like type)
+	make (a_name: READABLE_STRING; a_type: TYPEDEF_I)
 		require
-			name_not_empty: not a_name.is_empty
+			a_name_not_empty: not a_name.is_empty
 		do
-			name := make_immutable_string (a_name)
+			name := a_name
 			type := a_type
 			has_description := False
 			create {IMMUTABLE_STRING_8}description.make_empty
@@ -31,15 +28,15 @@ feature {NONE} -- Initialization
 			description_set: description.is_empty
 		end
 
-	make_with_description (a_name: like name; a_type: like type; a_description: like description)
+	make_with_description (a_name: READABLE_STRING; a_type: TYPEDEF_I; a_description: READABLE_STRING)
 		require
-			name_not_empty: not a_name.is_empty
-			description_not_empty: not a_description.is_empty
+			a_name_not_empty: not a_name.is_empty
+			a_description_not_empty: not a_description.is_empty
 		do
-			name := make_immutable_string (a_name)
+			name := a_name
 			type := a_type
 			has_description := True
-			description := make_immutable_string (a_description)
+			description := a_description
 		ensure
 			name_set: name.is_equal (a_name)
 			type_set: type = a_type
@@ -49,11 +46,11 @@ feature {NONE} -- Initialization
 
 feature -- Access
 
-	name: like {PACKAGEABLE_I}.name
+	name: READABLE_STRING
 
-	description: like {PACKAGEABLE_I}.description
+	description: READABLE_STRING
 
-	has_description: like {PACKAGEABLE_I}.has_description
+	has_description: BOOLEAN
 
 	type: TYPEDEF_I
 

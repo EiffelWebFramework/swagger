@@ -8,12 +8,6 @@ class
 inherit
 	TYPEDEF_I
 
-inherit {NONE}
-	STRING_ANCHOR
-		undefine
-			is_equal
-		end
-
 create {SHARED_SIMPLE_TYPEDEF}
 	make, make_no_good
 
@@ -21,7 +15,7 @@ feature {NONE} -- Constructor
 
 	make (a_name: READABLE_STRING)
 		do
-			name := make_immutable_string (a_name)
+			name := a_name
 			is_no_good := False
 		ensure
 			name_set: name.is_equal (a_name)
