@@ -150,12 +150,20 @@
         "name": {
           "type": "string",
           "required": "true",
-          "description": "Name"
+          "description": "Name",
+          "allowableValues": {
+            "valueType": "LIST",
+            "values": ["late", "cappuccino", "expresso"]
+          }
         },
         "size": {
           "type": "string",
           "required": "true",
-          "description": "Size"
+          "description": "Size",
+          "allowableValues": {
+            "valueType": "LIST",
+            "values": ["small", "mediumn", "large"]
+          }
         },
         "quantity": {
           "type": "integer",
@@ -165,7 +173,11 @@
         "option": {
           "type": "string",
           "required": "true",
-          "description": "Option"
+          "description": "Option",
+          "allowableValues": {
+            "valueType": "LIST",
+            "values": ["skim", "semi", "whole"]
+          }
         }
       }
     }
