@@ -7,8 +7,6 @@ class
 
 inherit
     JSON_CONVERTER
-
-    SHARED_PARAMETER_ORIGIN
     SHARED_SIMPLE_TYPEDEF
 
 create {SWAGGER_CONVERTERS_SET}
@@ -17,14 +15,17 @@ create {SWAGGER_CONVERTERS_SET}
 feature {NONE} -- Initialization
 
     make (a_parent_set: SWAGGER_CONVERTERS_SET)
+    	local
+    		l_type: SWAGGER_PARAMETER_TYPE
         do
-            create object.make ("name", String_def, Originate_from_path, Void, True, False)
+        	create l_type.make_from_path
+            create object.make ("name", String_def, l_type, Void, True)
         	create helper
         end
 
 feature -- Access
 
-    object: PARAMETER
+    object: SWAGGER_PARAMETER
 
     value: detachable JSON_OBJECT
 
@@ -46,11 +47,11 @@ feature -- Conversion
     			end
     			if attached helper.string_value (j.item (K_description)) as l_description then
     				create Result.make_with_description (l_name, l_description,
-    					create {TYPEDEF_SIMPLE}.make (l_dataype), create {PARAMETER_ORIGIN}.make (l_paramtype),
-    					l_default_value, l_required, False)
+    					create {TYPEDEF_SIMPLE}.make (l_dataype), create {SWAGGER_PARAMETER_TYPE}.make (l_paramtype),
+    					l_default_value, l_required)
     			else
 	    			create Result.make (l_name, create {TYPEDEF_SIMPLE}.make (l_dataype),
-	    				create {PARAMETER_ORIGIN}.make (l_paramtype), l_default_value, l_required, False)
+	    				create {SWAGGER_PARAMETER_TYPE}.make (l_paramtype), l_default_value, l_required)
     			end
     		end
     	end

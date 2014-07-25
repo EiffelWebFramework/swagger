@@ -1,9 +1,9 @@
 note
-	description: "Loads the metadata from SWAGGER files."
+	description: "Read a resource listing from files."
 	author: "Benoît Marchal"
 
 class
-	SWAGGER_FACTORY
+	SWAGGER_RESOURCE_LISTING_READER
 
 inherit
 	SHARED_MESSENGER
@@ -27,8 +27,8 @@ feature {NONE} -- Initialization
 
 feature -- Access
 
-	resources: detachable SWAGGER_RESOURCES
-			-- Swagger resources
+	resources: detachable SWAGGER_RESOURCE_LISTING
+			-- Resource listing
 
 feature -- Basic operations
 
@@ -44,7 +44,7 @@ feature -- Basic operations
 			if attached l_reader.read_json_from (file_name) as l_json then
 				create l_parser.make_parser (l_json)
 				if attached l_parser.parse as jv and l_parser.is_parsed then
-					if attached {SWAGGER_RESOURCES} Json.object (jv, "SWAGGER_RESOURCES") as l_resources then
+					if attached {SWAGGER_RESOURCE_LISTING} Json.object (jv, "SWAGGER_RESOURCE_LISTING") as l_resources then
 						resources := l_resources
 					end
 				else

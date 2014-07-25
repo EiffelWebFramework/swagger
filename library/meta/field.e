@@ -5,9 +5,6 @@ note
 class
 	FIELD
 
-inherit
-	PACKAGEABLE_I
-
 create
 	make, make_with_description
 

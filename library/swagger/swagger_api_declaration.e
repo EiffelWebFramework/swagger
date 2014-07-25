@@ -1,9 +1,9 @@
 note
-	description: "Swagger resource."
+	description: "Objects that provide information about an API exposed on a resource."
 	author: "Olivier Ligot"
 
 class
-	SWAGGER_RESOURCE
+	SWAGGER_API_DECLARATION
 
 create
 	make
@@ -11,6 +11,7 @@ create
 feature {NONE} -- Initialization
 
 	make (an_api_version: like api_version; a_swagger_version: like swagger_version; some_apis: like apis; a_resource_path: like resource_path)
+			-- Create an API declaration.
 		do
 			api_version := an_api_version
 			swagger_version := a_swagger_version
@@ -26,12 +27,17 @@ feature {NONE} -- Initialization
 feature -- Access
 
 	api_version: READABLE_STRING
+			-- Version of the application API
 
 	swagger_version: READABLE_STRING
+			-- Swagger Specification version being used
 
-	apis: READABLE_INDEXABLE [PACKAGE]
+	apis: READABLE_INDEXABLE [SWAGGER_API]
+			-- List of the APIs exposed on this resource
 
 	resource_path: READABLE_STRING
+			-- Relative path to the resource, from the basePath,
+			-- which this API Specification describes
 
 	name: STRING
 			-- Singular resource name

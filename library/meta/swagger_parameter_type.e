@@ -1,15 +1,16 @@
 note
-	description: "Where to read the parameter value from."
+	description: "Type of the parameter (that is, the location of the parameter in the request)."
 	author: "Benoît Marchal"
 
 class
-	PARAMETER_ORIGIN
+	SWAGGER_PARAMETER_TYPE
 
 create
-	make
-
-create {SHARED_PARAMETER_ORIGIN}
-	make_from_body, make_from_path, make_from_query, make_from_form
+	make,
+	make_from_body,
+	make_from_path,
+	make_from_query,
+	make_from_form
 
 feature {NONE} -- Initialization
 

@@ -1,9 +1,9 @@
 note
-	description: "JSON converter for package."
+	description: "JSON converter for API."
 	author: "Olivier Ligot"
 
 class
-	JSON_PACKAGE_CONVERTER
+	JSON_SWAGGER_API_CONVERTER
 
 inherit
     JSON_CONVERTER
@@ -17,13 +17,13 @@ feature {NONE} -- Initialization
 
     make (a_parent_set: SWAGGER_CONVERTERS_SET)
         do
-            create object.make ("", create {ARRAY [METHOD]}.make_empty)
+            create object.make ("", create {ARRAY [SWAGGER_OPERATION]}.make_empty)
         	create helper
         end
 
 feature -- Access
 
-    object: PACKAGE
+    object: SWAGGER_API
 
     value: detachable JSON_OBJECT
 
@@ -31,9 +31,9 @@ feature -- Conversion
 
     from_json (j: attached like value): detachable like object
     	local
-			l_swagger_apis: ARRAY [METHOD]
-			l_swagger_parameters: ARRAY [PARAMETER]
-			l_method: METHOD
+			l_swagger_apis: ARRAY [SWAGGER_OPERATION]
+			l_swagger_parameters: ARRAY [SWAGGER_PARAMETER]
+			l_method: SWAGGER_OPERATION
 			l_return_type: TYPEDEF_I
         do
 			if attached helper.string_value (j.item (K_path)) as l_path and
@@ -50,7 +50,7 @@ feature -- Conversion
 							across
 								l_parameters.array_representation as l_parameters_cursor
 							loop
-								if attached {PARAMETER} json.object (l_parameters_cursor.item, "PARAMETER") as l_parameter then
+								if attached {SWAGGER_PARAMETER} json.object (l_parameters_cursor.item, "SWAGGER_PARAMETER") as l_parameter then
 									l_swagger_parameters.force (l_parameter, l_swagger_parameters.upper + 1)
 								end
 							end
@@ -88,12 +88,12 @@ feature -- Conversion
 
 feature {NONE} -- Implementation
 
-	resource_converter: detachable JSON_SWAGGER_RESOURCE_CONVERTER
+	resource_converter: detachable JSON_SWAGGER_API_DECLARATION_CONVERTER
 		local
-			l_ressource: SWAGGER_RESOURCE
+			l_api_declaration: SWAGGER_API_DECLARATION
 		do
-            create l_ressource.make ("", "", create {ARRAY [PACKAGE]}.make_empty, "")
-            if attached {JSON_SWAGGER_RESOURCE_CONVERTER} Json.converter_for (l_ressource) as l_converter then
+            create l_api_declaration.make ("", "", create {ARRAY [SWAGGER_API]}.make_empty, "")
+            if attached {JSON_SWAGGER_API_DECLARATION_CONVERTER} Json.converter_for (l_api_declaration) as l_converter then
             	Result := l_converter
             end
 		end

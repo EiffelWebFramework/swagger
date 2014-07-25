@@ -1,9 +1,9 @@
 note
-	description: "JSON converter for swagger resources."
+	description: "JSON converter for resource listing."
 	author: "Olivier Ligot"
 
 class
-	JSON_SWAGGER_RESOURCES_CONVERTER
+	JSON_SWAGGER_RESOURCE_LISTING_CONVERTER
 
 inherit
     JSON_CONVERTER
@@ -18,7 +18,7 @@ feature {NONE} -- Initialization
 
     make (a_parent_set: like parent_set)
         do
-            create object.make ("", "", create {ARRAY [SWAGGER_RESOURCE]}.make_empty)
+            create object.make ("", "", create {ARRAY [SWAGGER_API_DECLARATION]}.make_empty)
             parent_set := a_parent_set
         	create helper
         ensure
@@ -27,7 +27,7 @@ feature {NONE} -- Initialization
 
 feature -- Access
 
-    object: SWAGGER_RESOURCES
+    object: SWAGGER_RESOURCE_LISTING
 
     value: detachable JSON_OBJECT
 
@@ -35,7 +35,7 @@ feature -- Conversion
 
     from_json (j: attached like value): detachable like object
     	local
-			l_swagger_apis: ARRAY [SWAGGER_RESOURCE]
+			l_swagger_apis: ARRAY [SWAGGER_API_DECLARATION]
 			l_old_filename: READABLE_STRING
 			l_resource_file: STRING
 			l_reader: JSON_FILE_READER
@@ -66,8 +66,8 @@ feature -- Conversion
         					if attached l_reader.read_json_from (l_resource_file) as l_json then
 								create l_parser.make_parser (l_json)
 								if attached l_parser.parse as jv and l_parser.is_parsed then
-									if attached {SWAGGER_RESOURCE} json.object (jv, "SWAGGER_RESOURCE") as l_resource then
-										l_swagger_apis.force (l_resource, l_swagger_apis.upper + 1)
+									if attached {SWAGGER_API_DECLARATION} json.object (jv, "SWAGGER_API_DECLARATION") as l_api_declaration then
+										l_swagger_apis.force (l_api_declaration, l_swagger_apis.upper + 1)
 									end
 								else
 									messenger.report_parsing_error (create {SWAGGER_LOCATOR}.make_with_file_only (l_resource_file),

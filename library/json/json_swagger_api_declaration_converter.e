@@ -1,9 +1,9 @@
 note
-	description: "JSON converter for swagger resource."
+	description: "JSON converter for API declaration."
 	author: "Olivier Ligot"
 
 class
-	JSON_SWAGGER_RESOURCE_CONVERTER
+	JSON_SWAGGER_API_DECLARATION_CONVERTER
 
 inherit
     JSON_CONVERTER
@@ -17,7 +17,7 @@ feature {NONE} -- Initialization
 
     make (a_parent_set: like parent_set)
         do
-            create object.make ("", "", create {ARRAY [PACKAGE]}.make_empty, "")
+            create object.make ("", "", create {ARRAY [SWAGGER_API]}.make_empty, "")
             create declarations.make_empty
             parent_set := a_parent_set
         	create helper
@@ -29,7 +29,7 @@ feature -- Access
 
 	declarations: SWAGGER_MODELS_FACTORY
 
-    object: SWAGGER_RESOURCE
+    object: SWAGGER_API_DECLARATION
 
     value: detachable JSON_OBJECT
 
@@ -42,7 +42,7 @@ feature -- Conversion
 
     from_json (j: attached like value): detachable like object
     	local
-			l_swagger_apis: ARRAY [PACKAGE]
+			l_swagger_apis: ARRAY [SWAGGER_API]
     	do
 			if attached {JSON_OBJECT} j.item (K_models) as l_models then
 	    		create declarations.make (parent_set.current_file, l_models)
@@ -57,8 +57,8 @@ feature -- Conversion
         		across
         			l_apis.array_representation as c
         		loop
-        			if attached {PACKAGE} json.object (c.item, "PACKAGE") as l_package then
-        				l_swagger_apis.force (l_package, l_swagger_apis.upper + 1)
+        			if attached {SWAGGER_API} json.object (c.item, "SWAGGER_API") as l_api then
+        				l_swagger_apis.force (l_api, l_swagger_apis.upper + 1)
         			end
         		end
         		create Result.make (l_api_version, l_swagger_version, l_swagger_apis, l_resource_path)

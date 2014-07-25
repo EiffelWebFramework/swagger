@@ -36,7 +36,7 @@ feature -- Access
 	current_file: READABLE_STRING
 		assign set_current_file
 
-	package: JSON_PACKAGE_CONVERTER
+	package: JSON_SWAGGER_API_CONVERTER
 		once ("OBJECT")
 			check attached package_implementation as a_package then
 				Result := a_package
@@ -50,14 +50,14 @@ feature -- Access
 			end
 		end
 
-	resources: JSON_SWAGGER_RESOURCES_CONVERTER
+	resources: JSON_SWAGGER_RESOURCE_LISTING_CONVERTER
 		once ("OBJECT")
 			check attached resources_implementation as a_resources then
 				Result := a_resources
 			end
 		end
 
-	resource: JSON_SWAGGER_RESOURCE_CONVERTER
+	resource: JSON_SWAGGER_API_DECLARATION_CONVERTER
 		once ("OBJECT")
 			check attached resource_implementation as a_resource then
 				Result := a_resource

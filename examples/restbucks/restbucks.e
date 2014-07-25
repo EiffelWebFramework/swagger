@@ -100,14 +100,14 @@ feature {NONE} -- Implementation
 
 	services: DS_HASH_TABLE [PROCEDURE [ANY, TUPLE [req: WSF_REQUEST; res: WSF_RESPONSE]], STRING]
 
-	resources: SWAGGER_RESOURCES
+	resources: SWAGGER_RESOURCE_LISTING
 			-- Swagger resources
 
 	read_swagger
 			-- Read the Swagger definition.
 		local
 			l_converters_set: SWAGGER_CONVERTERS_SET
-			l_reader: SWAGGER_FACTORY
+			l_reader: SWAGGER_RESOURCE_LISTING_READER
 		do
 			create l_converters_set.make
 			l_converters_set.add_converters_to (json)
@@ -128,7 +128,7 @@ feature {NONE} -- Implementation
 	map_router
 			-- Map the `router'.
 		local
-			l_method: METHOD
+			l_operation: SWAGGER_OPERATION
 			l_filter: WSF_FILTER
 			l_options_filter: WSF_CORS_OPTIONS_FILTER
 			l_validation_filter: REST_INPUT_PARAMETERS_VALIDATION_FILTER
@@ -142,19 +142,19 @@ feature {NONE} -- Implementation
 					l_apis.item.apis as l_resource_apis
 				loop
 					across
-						l_resource_apis.item.methods as l_methods
+						l_resource_apis.item.operations as l_operations
 					loop
-						l_method := l_methods.item
+						l_operation := l_operations.item
 						create l_options_filter.make (router)
 						l_filter := l_options_filter
-						create l_validation_filter.make (l_method)
+						create l_validation_filter.make (l_operation)
 						l_options_filter.set_next (l_validation_filter)
-						create l_agent_filter.make (services.item (l_method.nickname))
+						create l_agent_filter.make (services.item (l_operation.nickname))
 						l_validation_filter.set_next (l_agent_filter)
 						create l_req_methods
-						l_req_methods.enable_custom (l_method.http_method)
+						l_req_methods.enable_custom (l_operation.method)
 						l_req_methods.enable_options
-						router.handle_with_request_methods (l_method.path, create {WSF_URI_TEMPLATE_AGENT_HANDLER}.make (agent l_filter.execute), l_req_methods)
+						router.handle_with_request_methods (l_operation.path, create {WSF_URI_TEMPLATE_AGENT_HANDLER}.make (agent l_filter.execute), l_req_methods)
 					end
 				end
 			end

@@ -15,17 +15,17 @@ create
 
 feature {NONE} -- Initialization
 
-	make (a_method: like method)
+	make (an_operation: SWAGGER_OPERATION)
 		do
-			method := a_method
+			operation := an_operation
 		ensure
-			method_set: method = a_method
+			operation_set: operation = an_operation
 		end
 
 feature -- Access
 
-	method: METHOD
-			-- Method
+	operation: SWAGGER_OPERATION
+			-- Operation
 
 feature -- Basic operations
 
@@ -33,7 +33,7 @@ feature -- Basic operations
 			-- Execute the filter
 		local
 			l_missing_fields, l_invalid_fields: DS_LINKED_LIST [STRING]
-			l_parameter: PARAMETER
+			l_parameter: SWAGGER_PARAMETER
 			l_name: STRING
 			l_object: JSON_OBJECT
 			l_errors: JSON_ARRAY
@@ -42,12 +42,12 @@ feature -- Basic operations
 			create l_missing_fields.make_equal
 			create l_invalid_fields.make_equal
 			across
-				method.parameters as l_parameters
+				operation.parameters as l_parameters
 			loop
 				l_parameter := l_parameters.item
 				l_name := l_parameter.name
 				if l_parameter.is_required then
-					if (l_parameter.origin.is_from_path or l_parameter.origin.is_from_query) and req.item (l_name) = Void then
+					if (l_parameter.param_type.is_from_path or l_parameter.param_type.is_from_query) and req.item (l_name) = Void then
 						l_missing_fields.force_last (l_name)
 					end
 				end
