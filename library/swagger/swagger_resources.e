@@ -1,8 +1,6 @@
 note
 	description: "Swagger resources."
 	author: "Olivier Ligot"
-	date: "$Date$"
-	revision: "$Revision$"
 
 class
 	SWAGGER_RESOURCES
